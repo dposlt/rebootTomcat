@@ -14,22 +14,22 @@ def wrapper(*args):
 		deleteLog()
 	elif sys.argv[1] == '-l':
 		showCatalinaLog()
-	elif sys.argv[1] == '-p':
-		PID()
+	elif sys.argv[1] == '-k':
+		killPID()
 	elif sys.argv[1] == '-s':
 		startTomcat()
 	elif sys.argv[1] == '-a':
 		sudo()
-		PID()
+		killPID()
 		copyLogs()
 		startTomcat()
 		showCatalinaLog()
 	else:
-		print('neplatny argument')
+		print('invalid argument')
 
 
 def sudo():
-	os.system('sudo -su tomcat')
+	os.system('sudo -su adminUser')
 	
 
 def copyLogs():
@@ -37,28 +37,28 @@ def copyLogs():
 	backup logs file
 	'''
 	target = '/tmp'
-	source = '/aplikace/liferay/logs/'
-	catalina = '/aplikace/liferay/tomcat-7.0.42/logs/catalina.out'
+	source = '/app/liferay/logs/'
+	catalina = '/app/liferay/tomcat-7.0.42/logs/catalina.out'
 
-	shutil.copy2(source+'genmapa.log',target)
-	shutil.copy2(source+'eagle.log',target)
-	shutil.copy2(source+'spilka.log',target)
+	shutil.copy2(source+'log1.log',target)
+	shutil.copy2(source+'log2.log',target)
+	shutil.copy2(source+'log3.log',target)
 	shutil.copy2(catalina, target)
 
-	if os.path.isfile('/tmp/genmapa.log'):
-		print('genamapa done')
+	if os.path.isfile('/tmp/log1.log'):
+		print('log1 done')
 	else:
-		print('ERROR genmapa log')
+		print('ERROR log1')
 
-	if os.path.isfile('/tmp/eagle.log'):
-		print ('eagle done')
+	if os.path.isfile('/tmp/log2.log'):
+		print ('log2 done')
 	else:
-		print('ERROR eagle LOG')
+		print('ERROR log2')
 
-	if os.path.isfile('/tmp/spilka.log'):
-		print('spilka done')
+	if os.path.isfile('/tmp/log3.log'):
+		print('log3 done')
 	else:
-		print('ERROR spilka log')
+		print('ERROR log3')
 
 	if os.path.isfile('/tmp/catalina.out'):
 		print('catalina done')
@@ -68,11 +68,11 @@ def copyLogs():
 
 def deleteLog():
 	'''
-	smazani logu z adresare tmp
-	aby se nemuseli mazat rucne
+        delete logs from tmp directory
+	
 	'''
 	target = '/tmp/'
-	logs = ['spilka.log','genmapa.log','eagle.log','catalina.out']
+	logs = ['log1.log','log2.log','log3.log','catalina.out']
 	for log in logs:
 		os.remove(target+log)
 		if os.path.isfile(target+log) == False:
@@ -81,7 +81,7 @@ def deleteLog():
 			print('ERROR delete log: ' + log)
 
 
-def PID():
+def killPID():
 	pid = commands.getoutput("ps aux | egrep '^tomcat' | grep java | egrep -v grep | awk '{print $2}'")
 
 	os.system('kill -9 '+pid)
@@ -89,21 +89,21 @@ def PID():
 		
 
 def showCatalinaLog():
-	os.system('tail -f /aplikace/liferay/tomcat-7.0.42/logs/catalina.out')
+	os.system('tail -f /app/liferay/tomcat/logs/catalina.out')
 
 
 def startTomcat():
-	target = ('/aplikace/liferay/tomcat-7.0.42/bin/')
+	target = ('/app/liferay/tomcat/bin/')
 	os.system(target + './startup.sh')
 
 try:	
     wrapper()
 except:
-   print(''' python rtomcat.py -c pro zkopirovani logu do /tmp
- python rtomcat.py -d pro smazani logu z /tmp
- python rtomcat.py -l pro zobrazeni logu catalina.out
- python rtomcat.py -p pro zabiti procesu java
- python rtomcat.py -s pro nastartovani sluzby tomcat
- python rtomcat.py -a pro spusteni vsech procesu(kill java, copy log, start tomcat)
+   print(''' python rtomcat.py -c for copy logs to /tmp
+ python rtomcat.py -d for delete log from /tmp
+ python rtomcat.py -l for show log catalina.out
+ python rtomcat.py -k for kill java process
+ python rtomcat.py -s for start tomcat
+ python rtomcat.py -a for all (kill java, copy log, start tomcat)
 	''')
 
