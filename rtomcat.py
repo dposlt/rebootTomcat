@@ -40,32 +40,22 @@ def copyLogs():
 	source = '/app/liferay/logs/'
 	catalina = '/app/liferay/tomcat-7.0.42/logs/catalina.out'
 
-	shutil.copy2(source+'log1.log',target)
-	shutil.copy2(source+'log2.log',target)
-	shutil.copy2(source+'log3.log',target)
-	shutil.copy2(catalina, target)
-
-	if os.path.isfile('/tmp/log1.log'):
-		print('log1 done')
-	else:
-		print('ERROR log1')
-
-	if os.path.isfile('/tmp/log2.log'):
-		print ('log2 done')
-	else:
-		print('ERROR log2')
-
-	if os.path.isfile('/tmp/log3.log'):
-		print('log3 done')
-	else:
-		print('ERROR log3')
-
-	if os.path.isfile('/tmp/catalina.out'):
-		print('catalina done')
-	else:
-		print('ERROR catalina log') 
-
-
+    logsArray = ['genmapa.log','spilka.log','eagle.log','catalina.out']
+    
+    for log in logsArray:
+        if os.path.isfile('source + log'):
+            shutil.copy2(source + log, target)
+        elif os.path.isfile('catalina + log'):
+            shutil.copy2(catalina + log, target)
+        else:
+            print('ERROR path')
+    
+    for Islog in logsArray:
+          if os.path.isfile('target + Islog'):
+            print(Islog + ' done')
+          else:
+            print('LOG ' + Islog + ' doesn\'t exists')
+   
 def deleteLog():
 	'''
         delete logs from tmp directory
