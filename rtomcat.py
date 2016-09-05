@@ -8,6 +8,8 @@ import os,shutil,sys,commands
 def wrapper(*args):
 	if sys.argv[1] == '-c':
 		copyLogs()
+	elif sys.argv[1] == '-hd':
+		heapdump(killPID().pid)
 	elif sys.argv[1] == '-su':
 		sudo()
 	elif sys.argv[1] == '-d':
@@ -86,6 +88,10 @@ def startTomcat():
 	target = ('/app/liferay/tomcat/bin/')
 	os.system(target + './startup.sh')
 
+
+def heapdump(pid):
+	os.system('jmap -dump:format=b,file=/tmp.hprof'+killPID().pid)
+
 try:	
     wrapper()
 except:
@@ -94,6 +100,7 @@ except:
  python rtomcat.py -l for show log catalina.out
  python rtomcat.py -k for kill java process
  python rtomcat.py -s for start tomcat
+ python rtomcat.py -hd for create heapdump "must by run first"
  python rtomcat.py -a for all (kill java, copy log, start tomcat)
 	''')
 
