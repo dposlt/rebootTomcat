@@ -14,8 +14,8 @@ Run
     ./rtomcat.py -s {start tomcat}
  
     ./rtomcat.py -l {show catalina.out "for start tomcat"}
-
-    ./rtomcat.py -hd {create heapdupm "must by run first"}
+    
+    ./rtomcat.py -h {create heapDump to /aplikace/liferay/ "must by run first"} 
     
     ./rtomcat.py -a {all process - kill, copy, start, show}
 
