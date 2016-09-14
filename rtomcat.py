@@ -2,7 +2,7 @@
 __author__ = 'David Poslt'
 
 
-import os,shutil,sys,commands
+import os,shutil,sys
 
 
 def wrapper(*args):
@@ -40,11 +40,17 @@ def copyLogs():
     '''
 
     target = '/tmp/'
-    source = '/aplikace/liferay/logs/'
-    catalina = '/aplikace/liferay/tomcat-7.0.42/logs/catalina.out'
-            
-    logsArray = ['genmapa.log','spilka.log','eagle.log','catalina.out']
-    
+    #source = '/aplikace/liferay/logs/'
+    #catalina = '/aplikace/liferay/tomcat-7.0.42/logs/catalina.out'
+    # testing logs
+
+    source = '/home/moula/Documents/project/rebootTomcat/'
+    target = '/home/moula/Documents/project/test/'
+
+    #logsArray = ['genmapa.log','spilka.log','eagle.log','catalina.out']
+
+
+    logsArray = ['logging.log', 'logging2.log']
     for log in logsArray:
         if os.path.isfile('source + log'):
             shutil.copy2(source + log, target)
@@ -74,7 +80,7 @@ def deleteLog():
 			print('ERROR delete log: ' + log)
 
 def getpid():
-    pid = commands.getoutput("ps aux | egrep '^tomcat' | grep java | egrep -v grep | awk '{print $2}'")
+    pid = os.system("ps aux | egrep '^tomcat' | grep java | egrep -v grep | awk '{print $2}'")
 
 def killPID():
 	os.system('kill -9 '+getpid())
