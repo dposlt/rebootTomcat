@@ -31,7 +31,7 @@ def wrapper(*args):
 
 
 def sudo():
-	os.system('sudo -su tomcat')
+	os.system('sudo -su tomcat') #where user 'tomcat' has access into logs and apache tomcat folder
 	
 
 def copyLogs():
@@ -40,10 +40,10 @@ def copyLogs():
     '''
 
     target = '/tmp/'
-    source = '/aplikace/liferay/logs/'
-    catalina = '/aplikace/liferay/tomcat-7.0.42/logs/'
+    source = '/app/liferay/logs/'
+    catalina = '/appp/liferay/tomcat/logs/'
     
-    logsArray = ['genmapa.log','spilka.log','eagle.log','catalina.out']
+    logsArray = ['log1.log','log2.log','log3.log','catalina.out'] #n logs
 
     for log in logsArray:
         if os.path.isfile(source + log):
@@ -65,7 +65,7 @@ def deleteLog():
 	
 	'''
 	target = '/tmp/'
-	logs = ['genmapa.log','spilka.log','eagle.log','catalina.out']
+	logs = ['log1.log','log2.log','log3.log','catalina.out'] #n logs witch was created
 	for log in logs:
                 if os.path.isfile(target+log):
                     os.remove(target+log)
@@ -74,7 +74,7 @@ def deleteLog():
 		    print('ERROR delete log: ' + log)
 
 def getpid():
-    pid = os.system("ps aux | egrep '^tomcat' | grep java | egrep -v grep | awk '{print $2}'")
+    pid = os.system("ps aux | egrep '^tomcat' | grep java | egrep -v grep | awk '{print $2}'") #user tomcat
 
 def killPID():
 	os.system('kill -9 '+getpid())
@@ -83,11 +83,11 @@ def killPID():
 		
 
 def showCatalinaLog():
-	os.system('tail -f /aplikace/liferay/tomcat-7.0.42/logs/catalina.out')
+	os.system('tail -f /app/liferay/tomcat/logs/catalina.out')
 
 
 def startTomcat():
-	target = ('/aplikace/liferay/tomcat-7.0.42/bin/')
+	target = ('/app/liferay/tomcat/bin/')
 	os.system(target + './startup.sh')
     
 def heapdump(pid):
