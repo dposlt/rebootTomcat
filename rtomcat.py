@@ -39,22 +39,16 @@ def copyLogs():
         backup logs file
     '''
 
-    #target = '/tmp/'
-    #source = '/aplikace/liferay/logs/'
-    #catalina = '/aplikace/liferay/tomcat-7.0.42/logs/catalina.out'
-    # testing logs
+    target = '/tmp/'
+    source = '/aplikace/liferay/logs/'
+    catalina = '/aplikace/liferay/tomcat-7.0.42/logs/'
+    
+    logsArray = ['genmapa.log','spilka.log','eagle.log','catalina.out']
 
-    source = 'C:\\Users\\212437054\\Desktop\\tech dokumenty\\'
-    target = 'C:\\Users\\212437054\\Desktop\\tech dokumenty\\test\\'
-
-    #logsArray = ['genmapa.log','spilka.log','eagle.log','catalina.out']
-
-
-    logsArray = ['test.log','test2.log']
     for log in logsArray:
         if os.path.isfile(source + log):
             shutil.copy2(source + log, target)
-        elif os.path.isfile('catalina + log'):
+        elif os.path.isfile(catalina + log):
             shutil.copy2(catalina + log, target)
 
                         
@@ -73,11 +67,11 @@ def deleteLog():
 	target = '/tmp/'
 	logs = ['genmapa.log','spilka.log','eagle.log','catalina.out']
 	for log in logs:
-		os.remove(target+log)
-		if os.path.isfile(target+log) == False:
-			print('Successful delete log: ' + log)
+                if os.path.isfile(target+log):
+                    os.remove(target+log)
+                    print('Successful delete log: ' + log)
 		else:
-			print('ERROR delete log: ' + log)
+		    print('ERROR delete log: ' + log)
 
 def getpid():
     pid = os.system("ps aux | egrep '^tomcat' | grep java | egrep -v grep | awk '{print $2}'")
