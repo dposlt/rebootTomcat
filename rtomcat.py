@@ -39,27 +39,27 @@ def copyLogs():
         backup logs file
     '''
 
-    target = '/tmp/'
+    #target = '/tmp/'
     #source = '/aplikace/liferay/logs/'
     #catalina = '/aplikace/liferay/tomcat-7.0.42/logs/catalina.out'
     # testing logs
 
-    source = '/home/moula/Documents/project/rebootTomcat/'
-    target = '/home/moula/Documents/project/test/'
+    source = 'C:\\Users\\212437054\\Desktop\\tech dokumenty\\'
+    target = 'C:\\Users\\212437054\\Desktop\\tech dokumenty\\test\\'
 
     #logsArray = ['genmapa.log','spilka.log','eagle.log','catalina.out']
 
 
-    logsArray = ['logging.log', 'logging2.log']
+    logsArray = ['test.log','test2.log']
     for log in logsArray:
-        if os.path.isfile('source + log'):
+        if os.path.isfile(source + log):
             shutil.copy2(source + log, target)
         elif os.path.isfile('catalina + log'):
             shutil.copy2(catalina + log, target)
 
                         
     for Islog in logsArray:
-        if os.path.isfile('target + Islog'):
+        if os.path.isfile(target + Islog):
             print(Islog + ' done')
         else:
             print('LOG ' + Islog + ' doesn\'t exists')
@@ -111,4 +111,5 @@ except:
  python rtomcat.py -h for create heapdump "must by run first"
  python rtomcat.py -a for all (kill java, copy log, start tomcat)
 	''')
+
 
