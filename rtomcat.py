@@ -97,7 +97,8 @@ def heapdump(pid):
 try:	
     wrapper()
 except:
-   print(''' python rtomcat.py -c for copy logs to /tmp
+   print('''
+ python rtomcat.py -c for copy logs to /tmp
  python rtomcat.py -d for delete log from /tmp
  python rtomcat.py -l for show log catalina.out
  python rtomcat.py -k for kill java process

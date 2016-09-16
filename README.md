@@ -3,7 +3,7 @@
 Reboot tomcat is simply scrip for kill runnig Tomcat Java process
 
 Run 
-    ./rtomcat.py -su {change to administrator}
+    ./rtomcat.py -su {change to tomcat or another user, witch has access to tomcat folders}
 
     ./rtomcat.py -k {kill process}
 
