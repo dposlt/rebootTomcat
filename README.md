@@ -2,6 +2,9 @@
 
 Reboot tomcat is simply scrip for kill runnig Tomcat Java process
 
+Program is better copy to user, witch has access to tomcat folders
+
+
 Run 
     ./rtomcat.py -su {change to tomcat or another user, witch has access to tomcat folders}
 
