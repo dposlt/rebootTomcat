@@ -40,8 +40,8 @@ def copyLogs():
     '''
 
     target = '/tmp/'
-    source = '/app/liferay/logs/'
-    catalina = '/appp/liferay/tomcat/logs/'
+    source = '/app/logs/'
+    catalina = '/appp/logs/'
     
     logsArray = ['log1.log','log2.log','log3.log','catalina.out'] #n logs
 
@@ -83,11 +83,11 @@ def killPID():
 		
 
 def showCatalinaLog():
-	os.system('tail -f /app/liferay/tomcat/logs/catalina.out')
+	os.system('tail -f /app/logs/catalina.out')
 
 
 def startTomcat():
-	target = ('/app/liferay/tomcat/bin/')
+	target = ('/app/bin/')
 	os.system(target + './startup.sh')
     
 def heapdump(pid):
